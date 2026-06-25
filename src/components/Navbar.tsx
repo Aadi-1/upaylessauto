@@ -35,11 +35,13 @@ export default function Navbar() {
           alt="UPayLess Auto Repair Logo"
           width={200}
           height={200}
+          className="hidden md:block"
         />
         {/* <img src="https://placehold.co/150x50" alt="UPayLess Logo" /> */}
-        <div className="font-heading font-bold text-xl">
-          {/* <span className="text-brand-light">UPayLess</span>
-          <span className="text-brand-orange"> Auto Repair</span> */}
+        <div className="font-heading font-bold text-xl text-center">
+          <span className="block md:hidden text-brand-light font-heading font-semibold text-2xl mx-auto">
+            UPayLess Auto Repair
+          </span>
         </div>
 
         {/* Desktop nav */}

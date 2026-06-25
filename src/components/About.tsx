@@ -13,6 +13,7 @@ export default function About() {
                 src={upayless2}
                 alt="UPayLess Auto Repair shop"
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover rounded-2xl"
               />
               {/* <img

@@ -17,7 +17,7 @@ export default function Footer() {
               <span className="text-brand-light">UPayLess</span>
               <span className="text-brand-orange"> Auto Repair</span>
             </div>
-            <p className="text-sm text-brand-muted mt-4 max-w-xs leading-relaxed font-body">
+            <p className="text-sm  mt-4 max-w-xs leading-relaxed text-brand-light">
               Full-service auto repair specializing in brakes, oil changes,
               suspension, timing belts, tune-ups, and diagnostics. Serving Simi
               Valley for over 15 years.
@@ -34,7 +34,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-sm text-brand-muted hover:text-brand-orange transition-colors font-body"
+                    className="text-sm text-brand-light hover:text-brand-orange transition-colors font-body"
                   >
                     {link.label}
                   </a>
@@ -52,7 +52,7 @@ export default function Footer() {
               <li>
                 <a
                   href="tel:8053002996"
-                  className="text-sm text-brand-muted hover:text-brand-orange transition-colors font-body"
+                  className="text-sm text-brand-light hover:text-brand-orange transition-colors font-body"
                 >
                   (805) 300-2996
                 </a>
@@ -60,13 +60,13 @@ export default function Footer() {
               <li>
                 <a
                   href="mailto:upaylessautorepair2018@gmail.com"
-                  className="text-sm text-brand-muted hover:text-brand-orange transition-colors font-body"
+                  className="text-sm text-brand-light hover:text-brand-orange transition-colors font-body"
                 >
                   upaylessautorepair2018@gmail.com
                 </a>
               </li>
               <li>
-                <p className="text-sm text-brand-muted font-body">
+                <p className="text-sm text-brand-light font-body">
                   900 W Los Angeles Ave #1795
                   <br />
                   Simi Valley, CA 93065
@@ -85,7 +85,7 @@ export default function Footer() {
             href="https://www.clickbuilt.net/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs text-brand-muted hover:text-brand-orange transition-colors font-body"
+            className="text-md text-brand-light hover:text-brand-orange transition-colors font-body"
           >
             Website by ClickBuilt
           </a>
