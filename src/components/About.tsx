@@ -1,5 +1,5 @@
-import Image from "next/image";
-import upayless2 from "../../public/UPayLessAuto5.png";
+// import Image from "next/image";
+// import upayless2 from "../../public/UPayLessAuto5.png";
 
 export default function About() {
   return (
@@ -9,11 +9,16 @@ export default function About() {
           {/* Left column — image */}
           <div className="relative">
             <div className="relative aspect-[4/3] rounded-2xl bg-brand-gray flex items-center justify-center overflow-hidden">
-              <Image
+              {/* <Image
                 src={upayless2}
                 alt="UPayLess Auto Repair shop"
                 fill
                 className="object-cover rounded-2xl"
+              /> */}
+              <img
+                src="https://placehold.co/600x400"
+                alt="UPayLess Auto Repair shop"
+                className="object-cover rounded-2xl w-full h-full"
               />
             </div>
             <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-brand-orange/10 rounded-2xl -z-10" />

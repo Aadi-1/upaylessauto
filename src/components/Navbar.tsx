@@ -30,12 +30,13 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-6 md:px-8 h-20 flex items-center justify-between mb-6 mt-6">
         {/* TODO: Replace with <Image> logo when asset is provided */}
-        <Image
+        {/* <Image
           src={upaylesswhitelogo}
           alt="UPayLess Auto Repair Logo"
           width={200}
           height={200}
-        />
+        /> */}
+        <img src="https://placehold.co/150x50" alt="UPayLess Logo" />
         <div className="font-heading font-bold text-xl">
           {/* <span className="text-brand-light">UPayLess</span>
           <span className="text-brand-orange"> Auto Repair</span> */}
