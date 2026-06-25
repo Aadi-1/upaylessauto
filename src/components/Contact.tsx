@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MapPin, Phone, Clock, CheckCircle } from "lucide-react";
 
 type FormData = {
@@ -31,6 +31,17 @@ export default function Contact() {
     message: "",
     website: "",
   });
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const service = (e as CustomEvent<string>).detail;
+      if (serviceOptions.includes(service)) {
+        setFormData((prev) => ({ ...prev, service }));
+      }
+    };
+    window.addEventListener("upayless:select-service", handler);
+    return () => window.removeEventListener("upayless:select-service", handler);
+  }, []);
+
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);

@@ -1,12 +1,27 @@
-import { Disc3, Droplets, Gauge, Cog, Wrench, CircleHelp, ArrowRight } from "lucide-react";
+"use client";
+
+import {
+  Disc3,
+  Droplets,
+  Gauge,
+  Cog,
+  Wrench,
+  CircleHelp,
+  ArrowRight,
+} from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-const services: Array<{ icon: LucideIcon; title: string; description: string }> = [
+const services: Array<{
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  contactValue?: string;
+}> = [
   {
     icon: Disc3,
     title: "Brakes",
     description:
-      "Keep your vehicle safe with expert brake inspections, pad replacements, rotor resurfacing, and complete brake system repairs using quality parts you can trust.",
+      "Keep your vehicle safe with expert brake inspections, pad replacements, rotor resurfacing, and complete brake system repairs.",
   },
   {
     icon: Droplets,
@@ -18,13 +33,14 @@ const services: Array<{ icon: LucideIcon; title: string; description: string }> 
     icon: Gauge,
     title: "Suspension",
     description:
-      "Restore your ride quality with professional suspension repairs, including shocks, struts, and steering components to keep you stable on the road.",
+      "Restore your ride quality with professional suspension repairs, including shocks, struts, and steering components.",
   },
   {
     icon: Cog,
     title: "Timing Belt",
     description:
-      "Protect your engine from costly damage with timely timing belt inspections and replacements done to factory specifications.",
+      "Protect your engine from costly damage with timely timing belt inspections and replacements.",
+    contactValue: "Timing Belt Replacement",
   },
   {
     icon: Wrench,
@@ -37,6 +53,7 @@ const services: Array<{ icon: LucideIcon; title: string; description: string }> 
     title: "Not Sure What's Wrong?",
     description:
       "No idea what the issue is? Bring it in and we'll run a full diagnostic to pinpoint the problem and get you back on the road.",
+    contactValue: "Diagnostics",
   },
 ];
 
@@ -59,19 +76,27 @@ export default function Services() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service) => {
             const Icon = service.icon;
+            const contactValue = service.contactValue ?? service.title;
             return (
-              <div
+              <button
                 key={service.title}
-                className="bg-brand-card border border-gray-100 shadow-sm p-6 rounded-xl hover:border-brand-blue/30 hover:shadow-md transition-all duration-300"
+                type="button"
+                onClick={() => {
+                  window.dispatchEvent(
+                    new CustomEvent("upayless:select-service", { detail: contactValue })
+                  );
+                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="text-left bg-brand-card border border-gray-100 shadow-sm p-6 rounded-xl hover:border-brand-blue/30 hover:shadow-md hover:bg-blue-50/20 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2"
               >
                 <Icon className="text-brand-blue w-10 h-10 mb-4" />
-                <h3 className="text-xl font-heading font-semibold text-brand-text mb-2">
+                <h3 className="text-2xl font-heading font-semibold text-brand-text mb-2">
                   {service.title}
                 </h3>
                 <p className="text-base font-body text-brand-muted leading-relaxed">
                   {service.description}
                 </p>
-              </div>
+              </button>
             );
           })}
         </div>

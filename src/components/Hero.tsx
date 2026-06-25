@@ -7,8 +7,8 @@ export default function Hero() {
       className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 md:px-8"
     >
       {/* TODO: Replace with background image. Use next/image with fill, objectFit="cover", and a dark overlay div (bg-black/60) on top */}
-      <div className="absolute inset-0 bg-brand-dark" />
-
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#0b1f44_40%,_#1a3a6e_100%)]" />
+      {/* bg-[radial-gradient(ellipse_at_center,_#1a3a6e_0%,_#0b1f44_70%)] */}
       <div className="relative z-10 max-w-6xl mx-auto flex flex-col items-center">
         <p className="text-2xl uppercase tracking-[0.2em] text-brand-orange font-body mb-4 font-bold">
           TRUSTED <span className="underline">AUTO REPAIR</span> IN SIMI VALLEY

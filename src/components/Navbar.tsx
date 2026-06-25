@@ -48,14 +48,14 @@ export default function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              className="text-sm font-body text-brand-light hover:text-brand-orange transition-colors"
+              className="text-xl font-body text-brand-light hover:text-brand-orange transition-colors"
             >
               {link.label}
             </a>
           ))}
           <a
             href="tel:8053002996"
-            className="flex items-center gap-2 bg-brand-blue text-white text-sm px-4 py-2 rounded-lg hover:bg-brand-blue-hover transition-colors font-body focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 focus:ring-offset-brand-dark"
+            className="flex items-center gap-2 bg-brand-blue text-white text-lg px-4 py-2 rounded-lg hover:bg-brand-blue-hover transition-colors font-body focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 focus:ring-offset-brand-dark"
           >
             <Phone className="w-4 h-4" />
             Call Now
