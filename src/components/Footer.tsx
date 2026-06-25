@@ -67,9 +67,14 @@ export default function Footer() {
               </li>
               <li>
                 <p className="text-sm text-brand-light font-body">
-                  900 W Los Angeles Ave #1795
-                  <br />
-                  Simi Valley, CA 93065
+                  <a
+                    href="https://www.google.com/maps/place/900+W+Los+Angeles+Ave,+Simi+Valley,+CA+93065/@34.286793,-118.821188,16z/data=!4m6!3m5!1s0x80e82e7904e9caa7:0xb767b6a2cbf7820d!8m2!3d34.2867929!4d-118.821188!16s%2Fg%2F11c1hyblqv?hl=en-US&entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D"
+                    className="text-sm text-brand-light hover:text-brand-orange transition-colors font-body"
+                  >
+                    900 W Los Angeles Ave #1795
+                    <br />
+                    Simi Valley, CA 93065
+                  </a>
                 </p>
               </li>
             </ul>

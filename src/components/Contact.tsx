@@ -47,7 +47,9 @@ export default function Contact() {
   const [error, setError] = useState<string | null>(null);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
   ) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -91,7 +93,7 @@ export default function Contact() {
       setError(
         err instanceof Error
           ? err.message
-          : "Something went wrong. Please call us at (805) 300-2996."
+          : "Something went wrong. Please call us at (805) 300-2996.",
       );
     }
   };
@@ -132,7 +134,11 @@ export default function Contact() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col gap-4"
+                noValidate
+              >
                 {/* Honeypot */}
                 <input
                   type="text"
@@ -146,8 +152,14 @@ export default function Contact() {
                 />
 
                 <div>
-                  <label htmlFor="name" className="block text-sm font-body text-brand-text mb-1.5">
-                    Name <span className="text-brand-blue" aria-hidden="true">*</span>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-body text-brand-text mb-1.5"
+                  >
+                    Name{" "}
+                    <span className="text-brand-blue" aria-hidden="true">
+                      *
+                    </span>
                   </label>
                   <input
                     id="name"
@@ -162,8 +174,14 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-body text-brand-text mb-1.5">
-                    Phone <span className="text-brand-blue" aria-hidden="true">*</span>
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-body text-brand-text mb-1.5"
+                  >
+                    Phone{" "}
+                    <span className="text-brand-blue" aria-hidden="true">
+                      *
+                    </span>
                   </label>
                   <input
                     id="phone"
@@ -178,8 +196,14 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-body text-brand-text mb-1.5">
-                    Email <span className="text-brand-blue" aria-hidden="true">*</span>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-body text-brand-text mb-1.5"
+                  >
+                    Email{" "}
+                    <span className="text-brand-blue" aria-hidden="true">
+                      *
+                    </span>
                   </label>
                   <input
                     id="email"
@@ -194,7 +218,10 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="service" className="block text-sm font-body text-brand-text mb-1.5">
+                  <label
+                    htmlFor="service"
+                    className="block text-sm font-body text-brand-text mb-1.5"
+                  >
                     Service
                   </label>
                   <select
@@ -216,7 +243,10 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-body text-brand-text mb-1.5">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-body text-brand-text mb-1.5"
+                  >
                     Message
                   </label>
                   <textarea
@@ -290,10 +320,12 @@ export default function Contact() {
 
               <a
                 href="tel:8053002996"
-                className="bg-brand-gray rounded-xl p-5 flex items-start gap-4 border border-gray-200 hover:border-brand-blue/30 transition-colors"
+                className="bg-brand-gray rounded-xl p-5 flex items-start gap-4 border border-gray-200 hover:border-brand-blue/10 transition-colors"
               >
                 <Phone className="w-5 h-5 text-brand-blue mt-0.5 shrink-0" />
-                <p className="text-sm font-body text-brand-text">(805) 300-2996</p>
+                <p className="text-md font-body text-brand-text">
+                  (805) 300-2996
+                </p>
               </a>
 
               <div className="bg-brand-gray rounded-xl p-5 flex items-start gap-4 border border-gray-200">
@@ -302,7 +334,7 @@ export default function Contact() {
                   <p className="text-sm font-body text-brand-text">
                     Mon - Sat, 8 AM - 5 PM
                   </p>
-                  <p className="text-xs font-body text-brand-muted">
+                  <p className="text-sm font-body text-brand-muted">
                     Closed Sundays
                   </p>
                 </div>
