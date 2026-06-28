@@ -58,7 +58,10 @@ async function sendBrevoEmail(payload: object): Promise<void> {
 
 export async function POST(request: NextRequest) {
   if (!process.env.BREVO_API_KEY || !process.env.CONTACT_EMAIL_TO) {
-    return Response.json({ error: "Server configuration error." }, { status: 500 });
+    return Response.json(
+      { error: "Server configuration error." },
+      { status: 500 },
+    );
   }
 
   const ip =
@@ -91,28 +94,40 @@ export async function POST(request: NextRequest) {
   const service = body.service?.trim() ?? "";
   const message = body.message?.trim() ?? "";
 
-  if (!name) return Response.json({ error: "Name is required." }, { status: 400 });
+  if (!name)
+    return Response.json({ error: "Name is required." }, { status: 400 });
   if (!phone || !PHONE_RE.test(phone))
-    return Response.json({ error: "A valid phone number is required." }, { status: 400 });
+    return Response.json(
+      { error: "A valid phone number is required." },
+      { status: 400 },
+    );
   if (!email || !EMAIL_RE.test(email))
-    return Response.json({ error: "A valid email address is required." }, { status: 400 });
+    return Response.json(
+      { error: "A valid email address is required." },
+      { status: 400 },
+    );
 
-  const fromEmail = "admin@upaylessauto.com";
+  const fromEmail = "robert@upaylessauto.com";
   const fromName = "UPayLess Auto Repair";
   const svc = service || "General Inquiry";
 
+  const notifyTo = [
+    { email: process.env.CONTACT_EMAIL_TO },
+    ...(process.env.ADMIN_EMAIL ? [{ email: process.env.ADMIN_EMAIL }] : []),
+  ];
+
   const results = await Promise.allSettled([
-    // Notification email to shop
+    // Notification email to shop + admin
     sendBrevoEmail({
       sender: { name: fromName, email: fromEmail },
-      to: [{ email: process.env.CONTACT_EMAIL_TO }],
+      to: notifyTo,
       replyTo: { email, name },
       subject: `New Contact: ${svc} from ${name}`,
       htmlContent: `
         <h2>New contact form submission</h2>
         <table cellpadding="6" style="border-collapse:collapse">
           <tr><td><strong>Name</strong></td><td>${name}</td></tr>
-          <tr><td><strong>Phone</strong></td><td><a href="tel:${phone.replace(/\D/g, '')}">${phone}</a></td></tr>
+          <tr><td><strong>Phone</strong></td><td><a href="tel:${phone.replace(/\D/g, "")}">${phone}</a></td></tr>
           <tr><td><strong>Email</strong></td><td>${email}</td></tr>
           ${service ? `<tr><td><strong>Service</strong></td><td>${service}</td></tr>` : ""}
           ${message ? `<tr><td><strong>Message</strong></td><td>${message}</td></tr>` : ""}
@@ -139,14 +154,17 @@ export async function POST(request: NextRequest) {
   results.forEach((result, i) => {
     const label = i === 0 ? "email-notification" : "email-confirmation";
     if (result.status === "rejected") {
-      console.error(`${label} failed:`, (result as PromiseRejectedResult).reason);
+      console.error(
+        `${label} failed:`,
+        (result as PromiseRejectedResult).reason,
+      );
     }
   });
 
   if (results[0].status === "rejected") {
     return Response.json(
       { error: "Failed to send message. Please call us at (805) 300-2996." },
-      { status: 502 }
+      { status: 502 },
     );
   }
 

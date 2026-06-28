@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 md:px-8"
+      className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 md:px-8 pt-[130px] pb-[30px]"
     >
       {/* TODO: Replace with background image. Use next/image with fill, objectFit="cover", and a dark overlay div (bg-black/60) on top */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#0b1f44_40%,_#1a3a6e_100%)]" />

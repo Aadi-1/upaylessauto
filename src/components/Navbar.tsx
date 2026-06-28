@@ -29,20 +29,18 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 md:px-8 h-20 flex items-center justify-between mb-6 mt-6">
-        {/* TODO: Replace with <Image> logo when asset is provided */}
-        <Image
-          src={upaylesswhitelogo}
-          alt="UPayLess Auto Repair Logo"
-          width={200}
-          height={200}
-          className="hidden md:block"
-        />
-        {/* <img src="https://placehold.co/150x50" alt="UPayLess Logo" /> */}
-        <div className="font-heading font-bold text-xl text-center">
-          <span className="block md:hidden text-brand-light font-heading font-semibold text-2xl mx-auto">
+        <a href="#" aria-label="Back to top">
+          <Image
+            src={upaylesswhitelogo}
+            alt="UPayLess Auto Repair Logo"
+            width={200}
+            height={200}
+            className="hidden md:block"
+          />
+          <span className="block md:hidden text-brand-light font-heading font-semibold text-2xl">
             UPayLess Auto Repair
           </span>
-        </div>
+        </a>
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
