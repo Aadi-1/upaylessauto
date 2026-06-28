@@ -77,6 +77,7 @@ export async function POST(request: NextRequest) {
     service?: string;
     message?: string;
     website?: string;
+    turnstileToken?: string;
   };
   try {
     body = await request.json();
@@ -86,6 +87,26 @@ export async function POST(request: NextRequest) {
 
   if (body.website) {
     return Response.json({ ok: true });
+  }
+
+  // Turnstile verification
+  const tsRes = await fetch(
+    "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        secret: process.env.TURNSTILE_SECRET_KEY,
+        response: body.turnstileToken,
+      }),
+    }
+  );
+  const tsData = await tsRes.json() as { success: boolean };
+  if (!tsData.success) {
+    return Response.json(
+      { error: "Bot verification failed. Please refresh and try again." },
+      { status: 400 }
+    );
   }
 
   const name = body.name?.trim() ?? "";

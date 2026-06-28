@@ -1,7 +1,25 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { MapPin, Phone, Clock, CheckCircle } from "lucide-react";
+
+declare global {
+  interface Window {
+    turnstile: {
+      render: (
+        el: HTMLElement,
+        options: {
+          sitekey: string;
+          callback: (token: string) => void;
+          "expired-callback"?: () => void;
+          "error-callback"?: () => void;
+        }
+      ) => string;
+    };
+  }
+}
+
+const TURNSTILE_SITE_KEY = "0x4AAAAAADsH69fKgotVGGdq";
 
 type FormData = {
   name: string;
@@ -31,6 +49,12 @@ export default function Contact() {
     message: "",
     website: "",
   });
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     const handler = (e: Event) => {
       const service = (e as CustomEvent<string>).detail;
@@ -42,9 +66,26 @@ export default function Contact() {
     return () => window.removeEventListener("upayless:select-service", handler);
   }, []);
 
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      if (turnstileRef.current && window.turnstile) {
+        window.turnstile.render(turnstileRef.current, {
+          sitekey: TURNSTILE_SITE_KEY,
+          callback: (token) => setTurnstileToken(token),
+          "expired-callback": () => setTurnstileToken(null),
+          "error-callback": () => setTurnstileToken(null),
+        });
+      }
+    };
+    document.head.appendChild(script);
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -77,6 +118,7 @@ export default function Contact() {
           service: formData.service,
           message: formData.message,
           website: formData.website,
+          turnstileToken,
         }),
       });
 
@@ -260,6 +302,8 @@ export default function Contact() {
                   />
                 </div>
 
+                <div ref={turnstileRef} />
+
                 {error && (
                   <p className="text-sm text-red-500 font-body" role="alert">
                     {error}
@@ -268,7 +312,7 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  disabled={submitting}
+                  disabled={submitting || !turnstileToken}
                   className="w-full bg-brand-orange text-white font-semibold py-4 rounded-xl hover:bg-brand-orange-hover transition-colors text-base mt-2 font-body disabled:opacity-70 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 focus:ring-offset-brand-white flex items-center justify-center gap-2"
                 >
                   {submitting ? (
